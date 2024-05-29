@@ -4,16 +4,14 @@ version = "0.1.0"
 description = "Any any mmlab task to train"
 authors = ["Aleksandr Kalashnikov <sleep3r@icloud.com>"]
 readme = "README.md"
-packages = [{include = "mmlab"}]
 
 
 [tool.poetry.dependencies]
 python = "^3.12"
 torch = "^2.3.0"
 torchvision = "^0.18.0"
-mypy = "^1.1.1"
-ruff = "^0.0.258"
-
+isort = "^5.9.3"
+black = "^22.1.0"
 
 [build-system]
 requires = ["poetry-core"]

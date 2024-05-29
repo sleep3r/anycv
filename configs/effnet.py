@@ -1,6 +1,6 @@
 _base_ = [
-    'mmlab/mmpretrain/_base_/models/efficientnet_b0.py',
-    'mmlab/mmpretrain/_base_/default_runtime.py',
+    'mmlab/mmpretrain/configs/_base_/models/efficientnet_b0.py',
+    'mmlab/mmpretrain/configs/_base_/default_runtime.py',
 ]
 
 # Model settings
@@ -10,6 +10,8 @@ model = dict(
         topk=(1,),
     ),
 )
+
+load_from = "https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32_in1k_20220119-a7e2a0b1.pth"
 
 # dataset settings
 data_preprocessor = dict(
@@ -38,7 +40,7 @@ train_dataloader = dict(
     shuffle=True,
     dataset=dict(
         type='CustomDataset',
-        data_prefix='/Users/alexander/Desktop/image_classification.train/data/train',
+        data_prefix='data/train',
         with_label=True,
         pipeline=train_pipeline,
     ),
@@ -50,7 +52,7 @@ val_dataloader = dict(
     shuffle=False,
     dataset=dict(
         type='CustomDataset',
-        data_prefix='/Users/alexander/Desktop/image_classification.train/data/val',
+        data_prefix='data/val',
         with_label=True,
         pipeline=test_pipeline,
     ),
@@ -74,5 +76,3 @@ optim_wrapper = dict(
     # Use SGD optimizer to optimize parameters.
     optimizer=dict(type='Adam', lr=0.001, weight_decay=0.0001)
 )
-
-load_from = "https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32_in1k_20220119-a7e2a0b1.pth"
