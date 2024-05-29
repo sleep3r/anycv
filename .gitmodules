@@ -1,0 +1,9 @@
+[submodule "configs/mmlab/mmsegmentation"]
+	path = configs/mmlab/mmsegmentation
+	url = https://github.com/open-mmlab/mmpretrain.git
+[submodule "configs/mmlab/mmdetection"]
+	path = configs/mmlab/mmdetection
+	url = https://github.com/open-mmlab/mmpretrain.git
+[submodule "configs/mmlab/mmpretrain"]
+	path = configs/mmlab/mmpretrain
+	url = https://github.com/open-mmlab/mmpretrain.git
