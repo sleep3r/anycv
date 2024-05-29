@@ -15,6 +15,7 @@ INPUT_IMG=data/data/train/class_norma/508_lat.png
 TEST_IMG=data/data/train/class_pneumonia/369_pa.png
 WORK_DIR=data/test_exp
 DEVICE=cpu  # or 'cuda' if using GPU
+PROJECT=mmpretrain
 convert: ## Convert the model
 	docker run --rm -it \
 		-v $$(pwd):/root/workspace/data \
@@ -26,7 +27,7 @@ convert: ## Convert the model
 		-e WORK_DIR=$(WORK_DIR) \
 		-e DEVICE=$(DEVICE) \
 		openmmlab/mmdeploy:ubuntu20.04-cuda11.8-mmdeploy \
-		bash -c "mim install mmpretrain && python3 mmdeploy/tools/deploy.py \
+		bash -c "mim install $(PROJECT) && python3 mmdeploy/tools/deploy.py \
 		$(DEPLOY_CFG_PATH) \
 		$(MODEL_CFG_PATH) \
 		$(MODEL_CHECKPOINT_PATH) \
