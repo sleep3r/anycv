@@ -7,15 +7,6 @@ install:  ## Install the requirements
 train:  ## Train the model
 	PYTHONPATH=$$PWD:$$PYTHONPATH mim train $(PROJECT) $(CONFIG) --gpus $(GPUS) --work-dir $(WORKDIR)
 
-# Define variables at the beginning
-DEPLOY_CFG_PATH=mmdeploy/configs/mmpretrain/classification_onnxruntime_static.py
-MODEL_CFG_PATH=data/test_exp/effnet.py
-MODEL_CHECKPOINT_PATH=data/test_exp/epoch_38.pth
-INPUT_IMG=data/data/train/class_norma/508_lat.png
-TEST_IMG=data/data/train/class_pneumonia/369_pa.png
-WORK_DIR=data/test_exp
-DEVICE=cpu  # or 'cuda' if using GPU
-PROJECT=mmpretrain
 convert: ## Convert the model
 	docker run --rm -it \
 		-v $$(pwd):/root/workspace/data \
