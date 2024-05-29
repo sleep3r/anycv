@@ -1,13 +1,7 @@
-PROJECT_DIR = "/Users/alexander/Desktop/anycv/"
-
 _base_ = [
     'mmlab/mmpretrain/_base_/models/efficientnet_b0.py',
     'mmlab/mmpretrain/_base_/default_runtime.py',
 ]
-
-for i, item in enumerate(_base_):
-    _base_[i] = PROJECT_DIR + item
-
 
 # Model settings
 model = dict(
