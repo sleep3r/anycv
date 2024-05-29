@@ -1,6 +1,6 @@
 _base_ = [
-    'mmlab/mmpretrain/configs/_base_/models/efficientnet_b0.py',
-    'mmlab/mmpretrain/configs/_base_/default_runtime.py',
+    "mmlab/mmpretrain/configs/_base_/models/efficientnet_b0.py",
+    "mmlab/mmpretrain/configs/_base_/default_runtime.py",
 ]
 
 # Model settings
@@ -22,25 +22,25 @@ data_preprocessor = dict(
 )
 
 train_pipeline = [
-    dict(type='LoadImageFromFile'),
-    dict(type='Resize', scale=224),  # Resize the image to 224x224
-    dict(type='Normalize', **data_preprocessor),  # Normalizing the images
-    dict(type='PackInputs'),
+    dict(type="LoadImageFromFile"),
+    dict(type="Resize", scale=224),  # Resize the image to 224x224
+    dict(type="Normalize", **data_preprocessor),  # Normalizing the images
+    dict(type="PackInputs"),
 ]
 
 test_pipeline = [
-    dict(type='LoadImageFromFile'),
-    dict(type='Resize', scale=224),  # Resize the image to 224x224
-    dict(type='Normalize', **data_preprocessor),  # Normalizing the images
-    dict(type='PackInputs'),
+    dict(type="LoadImageFromFile"),
+    dict(type="Resize", scale=224),  # Resize the image to 224x224
+    dict(type="Normalize", **data_preprocessor),  # Normalizing the images
+    dict(type="PackInputs"),
 ]
 
 train_dataloader = dict(
     batch_size=8,  # Adjust batch size as per your system capabilities
     shuffle=True,
     dataset=dict(
-        type='CustomDataset',
-        data_prefix='data/train',
+        type="CustomDataset",
+        data_prefix="data/train",
         with_label=True,
         pipeline=train_pipeline,
     ),
@@ -51,8 +51,8 @@ val_dataloader = dict(
     batch_size=8,  # Adjust batch size as per your system capabilities
     shuffle=False,
     dataset=dict(
-        type='CustomDataset',
-        data_prefix='data/val',
+        type="CustomDataset",
+        data_prefix="data/val",
         with_label=True,
         pipeline=test_pipeline,
     ),
@@ -67,12 +67,12 @@ train_cfg = dict(
     val_interval=2,
 )
 val_cfg = dict()
-val_evaluator = dict(type='Accuracy', topk=(1,))
+val_evaluator = dict(type="Accuracy", topk=(1,))
 
 # Testing settings
 test_cfg = None
 
 optim_wrapper = dict(
     # Use SGD optimizer to optimize parameters.
-    optimizer=dict(type='Adam', lr=0.001, weight_decay=0.0001)
+    optimizer=dict(type="Adam", lr=0.001, weight_decay=0.0001)
 )

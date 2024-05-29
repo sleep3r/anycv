@@ -15,8 +15,8 @@ test:  ## Run the tests
 	pytest -s tests
 
 format:  ## Format configs
-	@isort ./configs
-	@black ./configs
+	@isort ./configs --skip configs/mmlab
+	@black ./configs --exclude configs/mmlab
 
 help: ## This help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
