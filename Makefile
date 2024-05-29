@@ -6,6 +6,7 @@ PROJECT_NAME=/anycv
 
 install:  ## Install the requirements
 	pip install -e .
+    mim install "mmengine>=0.7.1" "mmcv>=2.0.0rc4"
 
 train:  ## Train the model
 	PYTHONPATH=$PWD:$PYTHONPATH mim train $(PROJECT) $(CONFIG) --gpus $(GPUS) --work-dir $(WORKDIR)
