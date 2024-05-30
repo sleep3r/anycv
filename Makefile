@@ -1,11 +1,14 @@
-.PHONY: format test train install help convert
+.PHONY: format train install help convert eval
 
 install:  ## Install the requirements
-	pip install -e .
-	mim install "mmengine>=0.7.1" "mmcv>=2.0.0rc4"
+	poetry install
+	poetry run mim install "mmengine>=0.7.1" "mmcv>=2.0.0rc4"
 
 train:  ## Train the model
-	PYTHONPATH=$$PWD:$$PYTHONPATH mim train $(PROJECT) $(CONFIG) --gpus $(GPUS) --work-dir $(WORKDIR)
+	PYTHONPATH=$$PWD:$$PYTHONPATH poetry run mim train $(PROJECT) $(CONFIG) --gpus $(GPUS) --work-dir $(WORKDIR)
+
+eval: ## Evaluate the model
+	PYTHONPATH=$$PWD:$$PYTHONPATH poetry run mim test $(PROJECT) $(CONFIG) --checkpoint $(CHECKPOINT) --gpus $(GPUS) --work-dir $(WORKDIR)
 
 convert: ## Convert the model
 	docker run --rm -it \
@@ -18,7 +21,7 @@ convert: ## Convert the model
 		-e WORK_DIR=$(WORK_DIR) \
 		-e DEVICE=$(DEVICE) \
 		openmmlab/mmdeploy:ubuntu20.04-cuda11.8-mmdeploy \
-		bash -c "mim install $(PROJECT) && python3 mmdeploy/tools/deploy.py \
+		bash -c "mim install $(PROJECT) && pip install onnx onnxruntime && python3 mmdeploy/tools/deploy.py \
 		$(DEPLOY_CFG_PATH) \
 		$(MODEL_CFG_PATH) \
 		$(MODEL_CHECKPOINT_PATH) \
@@ -29,9 +32,6 @@ convert: ## Convert the model
 		--log-level INFO \
 		--show \
 		--dump-info"
-
-test:  ## Run the tests
-	pytest -s tests
 
 format:  ## Format configs
 	@isort ./configs --skip configs/mmlab

@@ -1,5 +1,5 @@
 _base_ = [
-    "mmlab/mmpretrain/configs/_base_/models/efficientnet_b0.py",
+    "mmlab/mmpretrain/configs/_base_/models/resnet18_cifar.py",
     "mmlab/mmpretrain/configs/_base_/default_runtime.py",
 ]
 
@@ -11,13 +11,13 @@ model = dict(
     ),
 )
 
-load_from = "https://download.openmmlab.com/mmclassification/v0/efficientnet/efficientnet-b0_3rdparty_8xb32_in1k_20220119-a7e2a0b1.pth"
+load_from = None
 
 
 # dataset settings
 data_preprocessor = dict(
-    mean=[0.1307],
-    std=[0.3081],
+    mean=[0.1307, 0.1307, 0.1307],
+    std=[0.3081, 0.3081, 0.3081],
     # convert image from BGR to RGB
     to_rgb=True,
 )
@@ -73,7 +73,21 @@ val_cfg = dict()
 val_evaluator = dict(type="Accuracy", topk=(1,))
 
 # Testing settings
-test_cfg = None
+test_cfg = dict()
+
+test_dataloader = dict(
+    batch_size=256,  # Adjust batch size as per your system capabilities
+    shuffle=False,
+    dataset=dict(
+        type="CustomDataset",
+        data_prefix="data/val",
+        with_label=True,
+        pipeline=test_pipeline,
+    ),
+    num_workers=8,  # Adjust num_workers as per your system capabilities
+)
+
+test_evaluator = dict(type="Accuracy", topk=(1,))
 
 # Optimizer settings
 optim_wrapper = dict(
