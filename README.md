@@ -19,6 +19,16 @@ GPUS=0 \
 make train
 ```
 
+## Test:
+```bash
+CONFIG=configs/effnet.py \
+WORKDIR=test_exp \
+PROJECT=mmpretrain \
+GPUS=0 \
+CHECKPOINT=epoch_38.pth \
+make test
+```
+
 ## Convert:
 
 ```bash

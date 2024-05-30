@@ -1,4 +1,4 @@
-.PHONY: format train install help convert eval
+.PHONY: format train install help convert test
 
 install:  ## Install the requirements
 	poetry install
@@ -7,7 +7,7 @@ install:  ## Install the requirements
 train:  ## Train the model
 	PYTHONPATH=$$PWD:$$PYTHONPATH poetry run mim train $(PROJECT) $(CONFIG) --gpus $(GPUS) --work-dir $(WORKDIR)
 
-eval: ## Evaluate the model
+test: ## Evaluate the model
 	PYTHONPATH=$$PWD:$$PYTHONPATH poetry run mim test $(PROJECT) $(CONFIG) --checkpoint $(CHECKPOINT) --gpus $(GPUS) --work-dir $(WORKDIR)
 
 convert: ## Convert the model
