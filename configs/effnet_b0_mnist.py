@@ -15,26 +15,16 @@ load_from = None
 
 
 # dataset settings
-data_preprocessor = dict(
-    mean=[0.1307, 0.1307, 0.1307],
-    std=[0.3081, 0.3081, 0.3081],
-    # convert image from BGR to RGB
-    to_rgb=True,
-)
-
+data_preprocessor = dict()
 
 # Data pipelines
 train_pipeline = [
     dict(type="LoadImageFromFile"),
-    dict(type="Resize", scale=(28, 28)),  # Resize to MNIST dimensions
-    dict(type="Normalize", **data_preprocessor),  # Normalize with MNIST stats
     dict(type="PackInputs"),
 ]
 
 test_pipeline = [
     dict(type="LoadImageFromFile"),
-    dict(type="Resize", scale=(28, 28)),  # Resize to MNIST dimensions
-    dict(type="Normalize", **data_preprocessor),  # Normalize with MNIST stats
     dict(type="PackInputs"),
 ]
 
@@ -66,8 +56,8 @@ val_dataloader = dict(
 # Training settings
 train_cfg = dict(
     by_epoch=True,
-    max_epochs=6,  # Increase the number of epochs if needed
-    val_interval=2,
+    max_epochs=2,  # Increase the number of epochs if needed
+    val_interval=1,
 )
 val_cfg = dict()
 val_evaluator = dict(type="Accuracy", topk=(1,))

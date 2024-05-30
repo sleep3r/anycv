@@ -21,7 +21,6 @@ convert: ## Convert the model
 		$(MODEL_CFG_PATH) \
 		$(MODEL_CHECKPOINT_PATH) \
 		$(INPUT_IMG) \
-		--test-img $(TEST_IMG) \
 		--work-dir $(WORK_DIR) \
 		--device $(DEVICE) \
 		--log-level INFO"

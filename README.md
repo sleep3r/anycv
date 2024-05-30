@@ -21,11 +21,11 @@ make train
 
 ## Test:
 ```bash
-CONFIG=configs/effnet.py \
+CONFIG=configs/effnet_b0_mnist.py \
 WORKDIR=test_exp \
 PROJECT=mmpretrain \
 GPUS=0 \
-CHECKPOINT=epoch_38.pth \
+CHECKPOINT=test_exp/epoch_6.pth \
 make test
 ```
 
@@ -61,7 +61,6 @@ DEPLOY_CFG_PATH=mmdeploy/configs/mmpretrain/classification_onnxruntime_dynamic.p
 MODEL_CFG_PATH=mount/test_exp/effnet_b0_mnist.py \
 MODEL_CHECKPOINT_PATH=mount/test_exp/epoch_2.pth \
 INPUT_IMG=mount/data/train/class_0/1.png \
-TEST_IMG=mount/data/train/class_1/3.png \
 WORK_DIR=mount/test_exp \
 DEVICE=cpu \
 PROJECT=mmpretrain \
