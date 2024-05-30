@@ -22,7 +22,7 @@ make train
 ## Convert:
 
 ```bash
-DEPLOY_CFG_PATH=mmdeploy/configs/mmpretrain/classification_onnxruntime_static.py \
+DEPLOY_CFG_PATH=mmdeploy/configs/mmpretrain/classification_onnxruntime_dynamic.py \
 MODEL_CFG_PATH=data/test_exp/effnet.py \
 MODEL_CHECKPOINT_PATH=data/test_exp/epoch_38.pth \
 INPUT_IMG=data/data/train/class_norma/508_lat.png \

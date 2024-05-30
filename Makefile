@@ -13,7 +13,7 @@ convert: ## Convert the model
 		-e DEPLOY_CFG_PATH=$(DEPLOY_CFG_PATH) \
 		-e MODEL_CFG_PATH=$(MODEL_CFG_PATH) \
 		-e MODEL_CHECKPOINT_PATH=$(MODEL_CHECKPOINT_PATH) \
-		-e INPUT_IMG=$(INPUT_IMG) \
+		-e INPUT_IMG=[$(INPUT_IMG)] \
 		-e TEST_IMG=$(TEST_IMG) \
 		-e WORK_DIR=$(WORK_DIR) \
 		-e DEVICE=$(DEVICE) \
