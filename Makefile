@@ -13,15 +13,10 @@ test: ## Evaluate the model
 convert: ## Convert the model
 	docker run --rm -it \
 		-v $$(pwd):/root/workspace/mount \
-		-e DEPLOY_CFG_PATH=$(DEPLOY_CFG_PATH) \
-		-e MODEL_CFG_PATH=$(MODEL_CFG_PATH) \
-		-e MODEL_CHECKPOINT_PATH=$(MODEL_CHECKPOINT_PATH) \
-		-e INPUT_IMG=$(INPUT_IMG) \
-		-e TEST_IMG=$(TEST_IMG) \
-		-e WORK_DIR=$(WORK_DIR) \
-		-e DEVICE=$(DEVICE) \
 		openmmlab/mmdeploy:ubuntu20.04-cuda11.8-mmdeploy \
-		bash -c "mim install $(PROJECT) && pip install onnx onnxruntime && python3 mmdeploy/tools/deploy.py \
+		bash -c "pip install onnx onnxruntime && \
+        pip install -U openmim && mim install mmpretrain && \
+		python3 mmdeploy/tools/deploy.py \
 		$(DEPLOY_CFG_PATH) \
 		$(MODEL_CFG_PATH) \
 		$(MODEL_CHECKPOINT_PATH) \
