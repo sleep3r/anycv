@@ -15,7 +15,7 @@ convert: ## Convert the model
 		-v $$(pwd):/root/workspace/mount \
 		openmmlab/mmdeploy:ubuntu20.04-cuda11.8-mmdeploy \
 		bash -c "pip install onnx onnxruntime && \
-        pip install -U openmim && mim install mmpretrain && \
+        pip install -U openmim && mim install $(PROJECT) && \
 		python3 mmdeploy/tools/deploy.py \
 		$(DEPLOY_CFG_PATH) \
 		$(MODEL_CFG_PATH) \
@@ -24,9 +24,7 @@ convert: ## Convert the model
 		--test-img $(TEST_IMG) \
 		--work-dir $(WORK_DIR) \
 		--device $(DEVICE) \
-		--log-level INFO \
-		--show \
-		--dump-info"
+		--log-level INFO"
 
 format:  ## Format configs
 	@isort ./configs --skip configs/mmlab
