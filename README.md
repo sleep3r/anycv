@@ -3,7 +3,7 @@
     <h3>Openmim based repo to train any mmlab project linked as submodule</h3>
 </div>
 
-----
+---
 
 ## Install:
 
