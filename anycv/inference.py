@@ -34,14 +34,13 @@ def preprocess_image(image_path: str, transform, data_preprocessor=None) -> np.n
     Returns:
         np.ndarray: Preprocessed image suitable for model input.
     """
-    data = dict(img_path=image_path)
-    transformed = transform(data)
-    input_data = transformed["inputs"].unsqueeze(0)  # Add batch dimension
+    transformed_data = transform({"img_path": image_path})
+    transformed_data.pop("data_samples")
 
     if data_preprocessor is not None:
-        input_data = data_preprocessor(input_data)["inputs"]
+        preprocessed_data = data_preprocessor(transformed_data)["inputs"]
 
-    return input_data.numpy().astype(np.float32)
+    return preprocessed_data.unsqueeze(0).numpy()
 
 
 def run_inference(
