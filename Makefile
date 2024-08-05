@@ -1,6 +1,7 @@
 .PHONY: format train install help convert test
 
 install:  ## Install the requirements
+	git submodule update --init --recursive
 	poetry install
 	poetry run mim install "mmengine>=0.7.1" "mmcv>=2.0.0rc4"
 
