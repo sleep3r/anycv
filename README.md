@@ -1,5 +1,6 @@
 <div align="center">
     <h1>Any CV</h1>
+    <h3>Openmim based repo to train any mmlab project linked as submodule</h3>
 </div>
 
 ----
