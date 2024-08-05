@@ -1,4 +1,4 @@
-.PHONY: format train install help convert test
+.PHONY: format train install help convert test infer
 
 install:  ## Install the requirements
 	git submodule update --init --recursive
@@ -17,6 +17,7 @@ convert: ## Convert the model
 		openmmlab/mmdeploy:ubuntu20.04-cuda11.8-mmdeploy \
 		bash -c "pip install onnx onnxruntime && \
         pip install -U openmim && mim install $(PROJECT) && \
+        cp $(DEPLOY_CFG_PATH) $(WORK_DIR)/ && \
 		python3 mmdeploy/tools/deploy.py \
 		$(DEPLOY_CFG_PATH) \
 		$(MODEL_CFG_PATH) \
@@ -25,6 +26,12 @@ convert: ## Convert the model
 		--work-dir $(WORK_DIR) \
 		--device $(DEVICE) \
 		--log-level INFO"
+
+infer: ## Run inference using the ONNX model
+	poetry run python anycv/inference.py \
+		--config_path=$${CONFIG_PATH} \
+		--model_path=$${MODEL_PATH} \
+		--image_path=$${IMAGE_PATH}
 
 format:  ## Format configs
 	@isort ./configs --skip configs/mmlab

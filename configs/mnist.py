@@ -15,16 +15,21 @@ load_from = None
 
 
 # dataset settings
-data_preprocessor = dict()
+data_preprocessor = dict(
+    mean=[127.5, 127.5, 127.5],
+    std=[127.5, 127.5, 127.5],
+)
 
 # Data pipelines
 train_pipeline = [
     dict(type="LoadImageFromFile"),
+    dict(type="Resize", scale=(32, 32)),
     dict(type="PackInputs"),
 ]
 
 test_pipeline = [
     dict(type="LoadImageFromFile"),
+    dict(type="Resize", scale=(32, 32)),
     dict(type="PackInputs"),
 ]
 
