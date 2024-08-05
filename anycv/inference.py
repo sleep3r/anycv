@@ -1,6 +1,6 @@
 import fire
 from mmengine import Config
-from mmengine.registry import DATASETS, MODELS
+from mmengine.registry import DATASETS, MODELS, DefaultScope
 import numpy as np
 import onnxruntime as ort
 
@@ -78,17 +78,20 @@ def get_prediction(ort_outs: np.ndarray, dataset) -> tuple[str, float]:
     return dataset._metainfo["classes"][pred], conf
 
 
-def main(config_path: str, model_path: str, image_path: str):
+def main(project: str, config_path: str, model_path: str, image_path: str):
     """
     Main function to perform inference using ONNX model.
 
     Args:
+        project (str): mmlab project name.
         config_path (str): Path to the configuration file.
         model_path (str): Path to the ONNX model file.
         image_path (str): Path to the input image.
     """
     config = Config.fromfile(config_path)
-    test_dataset, transform, data_preprocessor = build_dataset_and_transform(config)
+    with DefaultScope.overwrite_default_scope(scope_name=project):
+        test_dataset, transform, data_preprocessor = build_dataset_and_transform(config)
+
     ort_session = ort.InferenceSession(model_path)
     input_data = preprocess_image(image_path, transform, data_preprocessor)
     ort_outs = run_inference(ort_session, input_data)

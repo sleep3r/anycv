@@ -48,11 +48,23 @@ make convert
 To run example inference using the ONNX model, use the following command:
 
 ```bash
+PROJECT=mmpretrain \
 CONFIG_PATH=test_exp/mnist.py \
 MODEL_PATH=test_exp/end2end.onnx \
 IMAGE_PATH=data/train/class_0/1.png \
 make infer
 ```
+
+### FYI:
+Mmlab work diagram:
+<div align="center">
+    <img src="mmlab_blocks.jpg" width="100%">
+</div>
+
+Data is preprocessed using `mmdet.datasets.pipelines` inside datasets and optionally at data preprocessor inside the model.
+
+So, we reuse this logic in the infernce script for further use with Triton.
+
 
 ## MNIST Example:
 

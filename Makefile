@@ -29,6 +29,7 @@ convert: ## Convert the model
 
 infer: ## Run inference using the ONNX model
 	poetry run python anycv/inference.py \
+		--project=$${PROJECT} \
 		--config_path=$${CONFIG_PATH} \
 		--model_path=$${MODEL_PATH} \
 		--image_path=$${IMAGE_PATH}
