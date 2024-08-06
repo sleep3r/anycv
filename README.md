@@ -64,7 +64,7 @@ Mmlab work diagram:
 
 Data is preprocessed using `mmengine.Compose` inside datasets and optionally at data preprocessor inside the model.
 
-So, we reuse this logic in the infernce script for further use with Triton.
+So, we reuse this logic in the infernce script for further similar use with Triton.
 
 
 ## MNIST Example:
